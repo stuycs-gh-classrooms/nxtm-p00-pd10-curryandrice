@@ -28,31 +28,40 @@ All projects will require the following:
 
 #### Custom Force: 
 
+- Force of attraction torwards edge of screen
+
 ### Forumla
 What is the formula for your force? Including descriptions/definitions for the symbols. (You may include a picture of the formula if it is not easily typed.)
 
-YOUR ANSWER HERE
+- Gravity formula but calculating distance for each point along the edge, with no additional mass.
 
 ### Custom Force
-- What information that is already present in the `Orb` or `OrbNode` classes does this force use?
-  - YOUR ANSWER HERE
+What information that is already present in the `Orb` or `OrbNode` classes does this force use?
 
-- Does this force require any new constants, if so what are they and what values will you try initially?
-  - YOUR ANSWER HERE
+- center and mass.
 
-- Does this force require any new information to be added to the `Orb` class? If so, what is it and what data type will you use?
-  - YOUR ANSWER HERE
+ Does this force require any new constants, if so what are they and what values will you try initially?
+ 
+- we need a new constant for the eq, we will try a value similar to g
 
-- Does this force interact with other `Orbs`, or is it applied based on the environment?
-  - YOUR ANSWER HERE
+ Does this force require any new information to be added to the `Orb` class? If so, what is it and what data type will you use?
+ 
+- No.
 
-- In order to calculate this force, do you need to perform extra intermediary calculations? If so, what?
-  - YOUR ANSWER HERE
+Does this force interact with other `Orbs`, or is it applied based on the environment?
+
+- Applied based on environment.
+
+In order to calculate this force, do you need to perform extra intermediary calculations? If so, what?
+
+- Create a for loop iterating to width/height and applies force of that coordinate each time to selected ball.
 
 --- 
 
 ### Simulation 1: Gravity
 Describe how you will attempt to simulate orbital motion.
+
+
 
 --- 
 
