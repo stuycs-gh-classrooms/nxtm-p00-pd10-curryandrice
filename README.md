@@ -61,33 +61,32 @@ In order to calculate this force, do you need to perform extra intermediary calc
 ### Simulation 1: Gravity
 Describe how you will attempt to simulate orbital motion.
 
-
+- We could disable all forces except gravity (heavily reduced), attractive forces, and drag and then heavily increase drag to slow down movement. It may also be needed to set a minimum distance to prevent the planets from getting too close. 
 
 --- 
 
 ### Simulation 2: Spring
 Describe what your spring simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-YOUR ANSWER HERE
+- We will have two balls connected by a spring. all other forces will be turned off. One of the balls will have some intital velocity that will help demonstrate the effect of spring force on the other ball. When it approaches the other ball, it will be pushed back by the compressive force that has built up in the spring and the other ball will be pushed back by the transfered force. 
 
 --- 
 
 ### Simulation 3: Drag
 Describe what your drag simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-YOUR ANSWER HERE
+- We have a row of balls that all have velocity in the same direction. They will pass through two distinct, color-coded zones that have different drag coefficients. This will demonstrate the effect of drag on their movement as they slow down. 
 
 --- 
 
 ### Simulation 4: Custom force
 Describe what your Custom force simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-YOUR ANSWER HERE
+- We will have a row of orbs centered on the screen. They will have no initial velocity and the only force enabled will be our custom force. It will slowly accelerate the balls towards the edges of the screen. 
 
 --- 
 
 ### Simulation 5: Combination
 Describe what your combination simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-YOUR ANSWER HERE
-
+- drag, our custom force, spring force. The setup will be a row of balls, evenly split between the two "drag zones". they will be centered on the screen and connected through springs. We will see that the springs will pull all the balls toward the middle edges of the screen due to the pulling effect of the balls closer to the center have a shorter distance to their edges due to the pythagorean theorem. The different drag zones will create an effect where one side of the screen will have this process happen faster than the other. We expect for both sides to reach an endpoint where all balls are near the top and bottom edges of the screen.
