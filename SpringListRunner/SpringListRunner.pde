@@ -36,7 +36,8 @@ int MOVING = 0;
 int BOUNCE = 1;
 int GRAVITY = 2;
 int DRAGF = 3;
-boolean[] toggles = new boolean[4];
+int CUSTOM = 4;
+boolean[] toggles = new boolean[5];
 String[] modes = {"Moving", "Bounce", "Gravity", "Drag"};
 
 FixedOrb earth;
@@ -57,7 +58,7 @@ void draw() {
   displayMode();
 
   slinky.display();
-
+  
   if (toggles[MOVING]) {
 
     slinky.applySprings(SPRING_LENGTH, SPRING_K);
@@ -81,6 +82,7 @@ void keyPressed() {
   if (key == 'g') { toggles[GRAVITY] = !toggles[GRAVITY]; }
   if (key == 'b') { toggles[BOUNCE] = !toggles[BOUNCE]; }
   if (key == 'd') { toggles[DRAGF] = !toggles[DRAGF]; }
+  if (key == 'c'){ toggles[CUSTOM] = !toggles[CUSTOM];}
   if (key == '=' || key =='+') {
     slinky.addFront(new OrbNode());
   }
@@ -103,7 +105,7 @@ void displayMode() {
   int spacing = 85;
   int x = 0;
 
-  for (int m=0; m<toggles.length; m++) {
+  for (int m=0; m<=toggles.length; m++) {
     //set box color
     if (toggles[m]) { fill(0, 255, 0); }
     else { fill(255, 0, 0); }

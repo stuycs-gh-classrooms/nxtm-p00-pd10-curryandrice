@@ -66,7 +66,19 @@ class Orb {
     force.mult(strength);
     return force;
   }
-
+  
+PVector getCustom(float G) {
+    float strength = G * mass;
+    //dont want to divide by 0!
+    for (int x = 0; x < width; x += 10){
+      float r = max(center.dist(new PVector(x,0)), MIN_SIZE);
+      strength = strength/ pow(r, 2);
+    }
+    PVector force = this.center.copy();
+    force.mult(strength);
+    return force;
+  }
+  
   //spring force between calling orb and other
   PVector getSpring(Orb other, int springLength, float springK) {
     PVector direction = PVector.sub(other.center, this.center);
