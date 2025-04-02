@@ -69,13 +69,14 @@ void setup() {//orbs = array -- slinky = linked list
 
 void draw() {
   background(255);
-  displayMode();
-  if (dragsim) {
+   if (dragsim) {
     fill(#FA4C57);
     rect(0, 0, width/2, height);
     fill(#487AF5);
     rect(width/2, 0, width, height);
   }
+  displayMode();
+ 
   if (!dragsim) {
     slinky.display();
   }
