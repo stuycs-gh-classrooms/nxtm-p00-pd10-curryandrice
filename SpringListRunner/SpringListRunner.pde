@@ -163,6 +163,7 @@ void keyPressed() {
     for (int i = 0; i < orbs.length; i++) {
       orbs[i] = null;
     }
+    dragsim = false;
     toggles[MOVING] = true;
     toggles[SPRINGS] = true;
     toggles[BOUNCE] = true;
