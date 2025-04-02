@@ -97,6 +97,9 @@ void draw() {
           }
         }
         orbs[i].move(toggles[BOUNCE]);
+        if (toggles[DRAGF]){
+          orbs[i].applyForce(orbs[i].getDragForce(D_COEF));
+        }
       }
     }
   }
@@ -106,6 +109,9 @@ void draw() {
     }
     if (toggles[GRAVITY]) {
       slinky.applyGravity(earth, GRAVITY);
+    }
+    if (dragsim){
+      
     }
     slinky.run(toggles[BOUNCE]);
   }//moving
@@ -165,7 +171,7 @@ void keyPressed() {
   }
   if (key == '3'){//drag simulation
     for (int i = 0; i < orbs.length; i++) {
-      orbs[i] = null;
+      orbs[i] = new OrbNode();
     }
      dragsim = true;
     toggles[MOVING] = true;
@@ -175,7 +181,7 @@ void keyPressed() {
     toggles[GRAVITY] = true;
     toggles[CUSTOM] = false;
     slinky = new OrbList();
-    slinky.populate(12,true);
+    slinky.populate(1,true);
     fill(#FA4C57);
     rect(0,0,width/2,height);
     fill(#487AF5);
