@@ -70,13 +70,15 @@ void setup() {//orbs = array -- slinky = linked list
 void draw() {
   background(255);
   displayMode();
-  if (dragsim){
-       fill(#FA4C57);
-    rect(0,0,width/2,height);
+  if (dragsim) {
+    fill(#FA4C57);
+    rect(0, 0, width/2, height);
     fill(#487AF5);
-    rect(width/2,0,width,height); 
+    rect(width/2, 0, width, height);
   }
-  slinky.display();
+  if (!dragsim) {
+    slinky.display();
+  }
   for (int i = 0; i < orbs.length; i++) {
     if (orbs[i] != null) {
       PVector sf;
@@ -97,8 +99,16 @@ void draw() {
           }
         }
         orbs[i].move(toggles[BOUNCE]);
-        if (toggles[DRAGF]){
-          orbs[i].applyForce(orbs[i].getDragForce(D_COEF));
+        if (toggles[DRAGF]) {
+          if (dragsim) {
+            if (orbs[i].center.x > width/2) {
+              orbs[i].applyForce(orbs[i].getDragForce(D_COEF+0.1));
+            } else {
+              orbs[i].applyForce(orbs[i].getDragForce(D_COEF));
+            }
+          } else {
+            orbs[i].applyForce(orbs[i].getDragForce(D_COEF));
+          }
         }
       }
     }
@@ -110,9 +120,7 @@ void draw() {
     if (toggles[GRAVITY]) {
       slinky.applyGravity(earth, GRAVITY);
     }
-    if (dragsim){
-      
-    }
+
     slinky.run(toggles[BOUNCE]);
   }//moving
 }//draw
@@ -150,10 +158,9 @@ void keyPressed() {
     slinky.removeFront();
   }
   if (key == '1') {//gravity sim -- hard, work on this later
-  
   }
   if (key == '2') { //spring simulation
-      for (int i = 0; i < orbs.length; i++) {
+    for (int i = 0; i < orbs.length; i++) {
       orbs[i] = null;
     }
     toggles[MOVING] = true;
@@ -169,11 +176,11 @@ void keyPressed() {
     add = new OrbNode(width/2, height/2, MAX_SIZE, 100);
     slinky.addFront(add);
   }
-  if (key == '3'){//drag simulation
+  if (key == '3') {//drag simulation
     for (int i = 0; i < orbs.length; i++) {
-      orbs[i] = new OrbNode();
+      orbs[i] = new OrbNode(0+100*i, height/2, MAX_SIZE, 100);
     }
-     dragsim = true;
+    dragsim = true;
     toggles[MOVING] = true;
     toggles[SPRINGS] = false;
     toggles[BOUNCE] = true;
@@ -181,11 +188,11 @@ void keyPressed() {
     toggles[GRAVITY] = true;
     toggles[CUSTOM] = false;
     slinky = new OrbList();
-    slinky.populate(1,true);
+    slinky.populate(1, true);
     fill(#FA4C57);
-    rect(0,0,width/2,height);
+    rect(0, 0, width/2, height);
     fill(#487AF5);
-    rect(width/2,0,width,height);
+    rect(width/2, 0, width, height);
   }
 }//keyPressed
 
