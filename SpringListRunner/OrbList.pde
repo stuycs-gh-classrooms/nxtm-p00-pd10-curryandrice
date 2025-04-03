@@ -1,5 +1,4 @@
 /*===========================
-  OrbList (ALL WORK GOES HERE)
 
   Class to represent a Linked List of OrbNodes.
 
@@ -8,20 +7,7 @@
       The first element of the list.
       Initially, this will be null.
 
-  Methods to work on:
-    0. addFront
-    1. populate
-    2. display
-    3. applySprings
-    4. applyGravity
-    5. run
-    6. removeFront
-    7. getSelected
-    8. removeNode
-
-  When working on these methods, make sure to
-  account for null values appropraitely. When the program
-  is run, no NullPointerExceptions should occur.
+ 
   =========================*/
 
 class OrbList {

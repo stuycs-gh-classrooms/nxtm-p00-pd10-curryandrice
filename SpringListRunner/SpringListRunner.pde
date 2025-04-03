@@ -1,15 +1,12 @@
 /* ===================================
- SpringListDriver (No Work Goes Here)
- 
- This program will work similarly to SpringArrayDriver,
- but it will use a linked list of OrbNodes instead of
- an array. This driver file is complete, all your work should
- be done in the OrbList class. When working, the program can
- be controlled as follows:
+
  
  Keyboard commands:
- 1: Create a new list of orbs in a line.
- 2: Create a new list of random orbs.
+ 1: Orbit simulation
+ 2: String Simulation
+ 3: Drag simulation
+ 4: Custom Force simulation
+ 5: Composite simulation
  =: add a new node to the front of the list
  -: remove the node at the front
  SPACE: Toggle moving on/off
@@ -28,6 +25,7 @@ float MIN_MASS = 10;
 float MAX_MASS = 100;
 float G_CONSTANT = 1;
 float D_COEF = 0.1;
+float C_CONSTANT = 10;
 
 int SPRING_LENGTH = 50;
 float  SPRING_K = 0.005;
@@ -78,7 +76,7 @@ void draw() {
   displayMode();
  
   if (!dragsim) {
-    slinky.display();
+    //slinky.display();
   }
   for (int i = 0; i < orbs.length; i++) {
     if (orbs[i] != null) {
@@ -88,6 +86,11 @@ void draw() {
       if (toggles[MOVING]) {
         if (toggles[GRAVITY]) {
           orbs[i].applyForce(orbs[i].getGravity(earth, G_CONSTANT));
+        }
+        if (toggles[CUSTOM]) {
+          for (int x = 0; x < width; x += 10){
+          orbs[i].applyForce(orbs[i].getCustom(C_CONSTANT,x));
+          }
         }
         if (toggles[SPRINGS]) {
           if (orbs[i].next != null) {
