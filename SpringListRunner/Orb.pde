@@ -80,9 +80,13 @@ PVector getCustom(float C, int x, int y) {
       float r = max(center.dist(new PVector(x,y)), MIN_SIZE);
       strength = strength/ pow(r, 2);
     
-    PVector force = this.center.copy();
-    //force.sub(center);
+    PVector force = new PVector(x,y);
+    //PVector norm = new PVector(center.x-x,center.y-y);
+    //norm.normalize();
+    force.sub(center);
     force.mult(strength);
+    //force = new PVector(force.x*norm.x, force.y*norm.y);
+    if (y == 0){println("Custom: " +force);}
    // if (force.x != 0){println("Custom: " +force);}
     return force;
   }

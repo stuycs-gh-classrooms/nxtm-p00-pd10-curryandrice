@@ -114,7 +114,28 @@ class OrbList {
     }
     current.applyForce(current.getGravity(other,gConstant));
   }//applySprings
-
+  
+ void applyCustom(float cConstant,int x, int y) {
+  OrbNode current = front;
+    while(current.next != null){
+      current.applyForce(current.getCustom(cConstant,x,y));
+     current = current.next; 
+    }
+    current.applyForce(current.getCustom(cConstant,x,y));
+  }//applySprings
+  void applyDrag(float dConstant) {
+  OrbNode current = front;
+    while(current.next != null){
+      if (current.center.x > width/2){
+      current.applyForce(current.getDragForce(dConstant+0.2));
+     current = current.next; 
+      }
+      else{
+      current.applyForce(current.getDragForce(dConstant));
+     current = current.next; }
+    }
+    current.applyForce(current.getDragForce(dConstant));
+  }//applySprings
   /*===========================
     run(boolean bounce)
 
