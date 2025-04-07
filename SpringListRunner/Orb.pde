@@ -73,17 +73,17 @@ class Orb {
   
   
   */
-PVector getCustom(float C, int x) {
+PVector getCustom(float C, int x, int y) {
     float strength = C * mass;
     //dont want to divide by 0!
     
-      float r = max(center.dist(new PVector(x,0)), MIN_SIZE);
+      float r = max(center.dist(new PVector(x,y)), MIN_SIZE);
       strength = strength/ pow(r, 2);
     
     PVector force = this.center.copy();
-    force.sub(center);
+    //force.sub(center);
     force.mult(strength);
-    if (force.x != 0){println("Custom: " +force);}
+   // if (force.x != 0){println("Custom: " +force);}
     return force;
   }
   

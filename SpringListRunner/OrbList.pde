@@ -16,8 +16,6 @@ class OrbList {
 
   /*===========================
     Contructor
-    Does very little.
-    You do not need to modify this method.
     =========================*/
   OrbList() {
     front = null;
@@ -154,8 +152,6 @@ OrbNode current = front;
     a reference to that node.
     Otherwise, return null.
 
-    See isSlected(float x, float y) in
-    the Orb class (line 115).
     =========================*/
   OrbNode getSelected(int x, int y) {
   OrbNode current = front;

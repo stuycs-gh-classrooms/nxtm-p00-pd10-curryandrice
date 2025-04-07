@@ -25,7 +25,7 @@ float MIN_MASS = 10;
 float MAX_MASS = 100;
 float G_CONSTANT = 1;
 float D_COEF = 0.1;
-float C_CONSTANT = 10;
+float C_CONSTANT = 0.2;
 
 int SPRING_LENGTH = 50;
 float  SPRING_K = 0.005;
@@ -45,10 +45,11 @@ OrbList slinky;
 OrbNode[] orbs;
 
 boolean dragsim;
-
+boolean gravsim;
 void setup() {//orbs = array -- slinky = linked list
   size(600, 600);
-
+  gravsim = false;
+  dragsim = false;
   earth = new FixedOrb(width/2, height * 200, 1, 20000);
   orbCount = NUM_ORBS;
   orbs = new OrbNode[NUM_ORBS];
@@ -67,6 +68,13 @@ void setup() {//orbs = array -- slinky = linked list
 
 void draw() {
   background(255);
+  if (gravsim){
+   earth = new FixedOrb(width/2, height /2, 50, 200); 
+   earth.display();
+  }
+  else{
+   earth = new FixedOrb(width/2, height * 200, 1, 20000); 
+  }
    if (dragsim) {
     fill(#FA4C57);
     rect(0, 0, width/2, height);
@@ -76,7 +84,7 @@ void draw() {
   displayMode();
  
   if (!dragsim) {
-    //slinky.display();
+    slinky.display();
   }
   for (int i = 0; i < orbs.length; i++) {
     if (orbs[i] != null) {
@@ -88,9 +96,12 @@ void draw() {
           orbs[i].applyForce(orbs[i].getGravity(earth, G_CONSTANT));
         }
         if (toggles[CUSTOM]) {
-          for (int x = 0; x < width; x += 10){
-          orbs[i].applyForce(orbs[i].getCustom(C_CONSTANT,x));
-          }
+          for (int x = 0; x < width; x += 30){
+            for (int y = 0; y < height; y += 30){
+              if (y == 0 || y == height||x == 0 ||x == width){
+          orbs[i].applyForce(orbs[i].getCustom(C_CONSTANT,x,y));
+          }}
+        }
         }
         if (toggles[SPRINGS]) {
           if (orbs[i].next != null) {
@@ -162,11 +173,28 @@ void keyPressed() {
     slinky.removeFront();
   }
   if (key == '1') {//gravity sim -- hard, work on this later
+  for (int i = 0; i < orbs.length; i++) {
+      orbs[i] = new OrbNode(random(0+100*i), random(0+100*i), random(MAX_SIZE), random(100));
+    }
+    gravsim = true;
+    dragsim = false;
+    toggles[MOVING] = true;
+    toggles[SPRINGS] = false;
+    toggles[BOUNCE] = true;
+    toggles[DRAGF] = true;
+    toggles[GRAVITY] = true;
+    toggles[CUSTOM] = false;
+    slinky = new OrbList();
+    slinky.populate(1, true);
+  
+  
+  
   }
   if (key == '2') { //spring simulation
     for (int i = 0; i < orbs.length; i++) {
       orbs[i] = null;
     }
+    gravsim = false;
     dragsim = false;
     toggles[MOVING] = true;
     toggles[SPRINGS] = true;
@@ -185,6 +213,7 @@ void keyPressed() {
     for (int i = 0; i < orbs.length; i++) {
       orbs[i] = new OrbNode(0+100*i, height/2, MAX_SIZE, 100);
     }
+    gravsim = false;
     dragsim = true;
     toggles[MOVING] = true;
     toggles[SPRINGS] = false;
@@ -198,6 +227,36 @@ void keyPressed() {
     rect(0, 0, width/2, height);
     fill(#487AF5);
     rect(width/2, 0, width, height);
+  }
+  if (key == '4'){//custom force simulation
+   for (int i = 0; i < orbs.length; i++) {
+      orbs[i] = new OrbNode(0+100*i, height/2, MAX_SIZE, 100);
+    }
+    dragsim = false;
+    toggles[MOVING] = true;
+    toggles[SPRINGS] = false;
+    toggles[BOUNCE] = true;
+    toggles[DRAGF] = false;
+    toggles[GRAVITY] = false;
+    toggles[CUSTOM] = true;
+    slinky = new OrbList();
+    slinky.populate(1, true);
+    
+  }
+  if (key == '5'){//composite simulation
+    //for (int i = 0; i < orbs.length; i++) {
+  //    orbs[i] = new OrbNode(0+100*i, height/2, MAX_SIZE, 100);
+  //  }
+  gravsim = false;
+    dragsim = true;
+    toggles[MOVING] = true;
+    toggles[SPRINGS] = true;
+    toggles[BOUNCE] = true;
+    toggles[DRAGF] = true;
+    toggles[GRAVITY] = false;
+    toggles[CUSTOM] = true;
+    slinky = new OrbList();
+    slinky.populate(10, true);
   }
 }//keyPressed
 
